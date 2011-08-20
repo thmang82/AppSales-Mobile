@@ -12,3 +12,4 @@ build
 *.xcworkspacedata
 *.xcuserstate
 *xcuserdata*
+convert_dat_to_sales_txt.pl

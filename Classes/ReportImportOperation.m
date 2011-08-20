@@ -103,10 +103,11 @@
 			reportCSV = [[[NSString alloc] initWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:NULL] autorelease];
 			if (!reportCSV) reportCSV = [[[NSString alloc] initWithContentsOfFile:fullPath encoding:NSISOLatin1StringEncoding error:NULL] autorelease];
 		}
-		
+		NSLog(@"Path: %@",fullPath);
 		NSDictionary *reportInfo = [Report infoForReportCSV:reportCSV];
 		if (reportInfo) {
 			NSDate *reportDate = [reportInfo objectForKey:kReportInfoDate];
+            NSLog(@"Date: %@",reportDate);
 			NSMutableSet *existingDates = nil;
 			if ([[reportInfo objectForKey:kReportInfoClass] isEqualToString:kReportInfoClassDaily]) {
 				existingDates = existingDailyReportDatesSet;

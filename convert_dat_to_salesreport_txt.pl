@@ -131,15 +131,48 @@ while(defined(my $line = <READ_FILE>)) {
                     #print "tag:$tag value:$value\n";
                     $insert_counter ++;
                     
-                    $appname = $string_values[0];
-                    $buy_entry{"appame"} = $appname;
                     
+
+                    # There is a format issue in the files that needs to be addressed.
+                    # For reports created on or before 9/6/2010, the format is as is below....
+                    # ==========> String_values = 
+                    # 0=Greek Orthodox Calendar Lite
+                    # 1=AUD
+                    # 2=353093056
+                    
+                    # For reports created on or after 9/7/2010, the format is as is below
+                    # ==========> String_values = 
+                    # 0=353093056
+                    # 1=Greek Orthodox Calendar Lite
+                    # 2=AUD
+
+
+                    
+                    print "==========> String_values = \n0=$string_values[0]\n1=$string_values[1]\n2=$string_values[2]\n \n";
+                    
+                    # PRE 9/6/2010
                     $currency = $string_values[1];
+                    $appname = $string_values[0];
+
+                    # POST 9/7/2010
+                    # $currency = $string_values[2];
+                    # $appname = $string_values[1];
+
+
+
+                    $buy_entry{"appame"} = $appname;                    
                     $buy_entry{"currency"} = $currency;
                     
                     $ident = 000000000;
-                    if (@string_values > 2){
+                    if (@string_values > 2)
+                    {
+                        # PRE 9/6/2010
                         $ident = $string_values[2];
+
+                        # POST 9/7/2010
+                        # $ident = $string_values[0];
+                        
+                        
                         $buy_entry{"ident"} = $ident;
                     }else{
                         $ident = $NameToIdent{$appname};
